@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tic Tac Toe</title>
+	<link rel="stylesheet" href="tictactoe.css">
+</head>
+
+
+<body>
+	<div id="options">
+		<h3 class="option">Tic Tac Toe With GNN</h3>
+		<h3 class="option">Tic Tac Toe With MiniMax</h3>
+		<h3 class="option">Tic Tac Toe With ANN, GAN</h3>
+	</div>
+	<div id="intro">
+		<p>This is for my friends. plz come and play tic tac toe. this is how the bot will learn to play.</p>
+	</div>
+	
+	<div id="ground">	
+
+		<div id="board">
+			<div id="0" class="box" onclick="click_box(event)">_</div>
+			<div id="1" class="box" onclick="click_box(event)">_</div>
+			<div id="2" class="box" onclick="click_box(event)">_</div>
+			<div id="3" class="box" onclick="click_box(event)">_</div>
+			<div id="4" class="box" onclick="click_box(event)">_</div>
+			<div id="5" class="box" onclick="click_box(event)">_</div>
+			<div id="6" class="box" onclick="click_box(event)">_</div>
+			<div id="7" class="box" onclick="click_box(event)">_</div>
+			<div id="8" class="box" onclick="click_box(event)">_</div>
+		</div>
+		<div id="status">To start playing click play as X / play as O</div>
+	</div>
+	<br>
+	<!-- buttons to control -->
+	<button id="playX" onclick="click_option('X', 'playX', 'playO')">Play as X</button>
+	<button id="playO" onclick="click_option('O', 'playO', 'playX')">Play as O</button>
+	<button id="stop" onclick="reload(event)">Play Again</button>
+	
+	<!-- type="text/javascript"
+	src="tictactoe.css"-->
+	<script src="tictactoe.js"></script>
+</body>
+</html>
