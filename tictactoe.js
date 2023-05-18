@@ -1,34 +1,49 @@
-//=================================== logic of the site ==============================================
-//===================================================================================================
+//=================================== logic of the site ========================
+//==============================================================================
 
-
+//------------------- INITIALIZATIONS FOR THE GAME ------------------------------
 let game_state = '_';
 var gameOn = false;
 const Status = document.getElementById('status');
-// tree button state which can only on if the other two are off
+// tree button state which can only be on if the other two are off
 let board = [	[0, 0, 0],
-		[0, 0, 0],
-		[0, 0, 0] ]
+			[0, 0, 0],
+			[0, 0, 0] ]
+
+//------------------- INITIALIZATIONS FOR THE 'BOT' ------------------------------
+
+let inputs = []; //9x2 9 for Xs + 9 for Os
+let hidden = []; //9x7+1 total 63 neurones & a bias
+let outputs = []; //9 probabilities for 9 cells
+
+let h_weight = [] //18x64 = 1152 weights & biases
+let o_weight = [] //64x9 = 576 weights & biases
+
+//--------------------------------------------------------------------------------
 
 function reload(event) {	// for button-'play again'
 	location.reload();
 }
 
 function click_option(state, button, otherbutton) {	// for other to buttons
-	game_state = state;//this state of the game is like wich player is holding the pen & thinking
-	gameOn = true;
+	if (game_state != '_') {
+		alert('NO CHEATING!!!');
+	} else {
+		game_state = state;//this state of the game is like wich player is holding the pen & thinking
+		gameOn = true;
 	
-	// changing the other button
-	const otherButton = document.getElementById(otherbutton);
-	otherButton.style.boxShadow = 'black 2px 5px 4px';
-	otherButton.style.color = 'white';
-	otherButton.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
+		// changing the other button
+		const otherButton = document.getElementById(otherbutton);
+		otherButton.style.boxShadow = 'black 2px 5px 4px';
+		otherButton.style.color = 'white';
+		otherButton.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
 
-	// changing the clicked button
-	const Button = document.getElementById(button);
-	Button.style.color = 'black';
-	Button.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-	Button.style.boxShadow = 'box-shadow: none';
+		// changing the clicked button
+		const Button = document.getElementById(button);
+		Button.style.color = 'black';
+		Button.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+		Button.style.boxShadow = 'box-shadow: none';
+	}
 }
 
 function click_box(event) {		// on click on the cells
@@ -52,8 +67,14 @@ function click_box(event) {		// on click on the cells
 		else if (game_state === 'O') {
 			board[i][j] = 2;
 		}
-
+		// updating the Neural Net's inputs----------------------------------------
+		for (let i=0; i<3; i++) {
+			for (let j=0; j<3; j++) {
+				inputs[3*i +j] = board[i][j];
+			}
+		}
 		// logging
+		console.log(inputs);
 		console.log(board);
 		//console.log(check_win());
 
